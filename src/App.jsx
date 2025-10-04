@@ -4,31 +4,74 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const tasks = [
+    {
+      name: "Finish this mockup",
+      details: "per react guidelines, we're going to build a static model first, then add the functionality. This task is for finishing the static model itself.",
+      completed_at: null,
+      created_at: Date()
+    },
+    {
+      name: "Wash The Dishes",
+      details: "You know it needs to happen. Come on.",
+      completed_at: null,
+      created_at: Date()
+    },
+    {
+      name: "Take Out the Trash",
+      details: "Trash and recycling",
+      completed_at: null,
+      created_at: Date()
+    },
+  ];
+
+  const currentTask = 1;
+
+  function Task({ task }) {
+    return (
+      <div style={{border: "3px solid white"}} >
+        <h2>{ task.name }</h2>
+        <p>{ task.details.slice(0, 100) }</p>
+      </div>
+    );
+  };
+
+  function TaskList() {
+
+    return (
+      <div>
+        {tasks.map((task, index) => (
+          <Task 
+            task={task} />
+        ))}
+      </div>
+    );
+  };
+
+  function TaskDetails() {
+    if (!currentTask) {
+      return(<h2>No Task Selected</h2>);
+    } else {
+      const task = tasks[currentTask]
+      return(
+        <>
+          <h2>{ task.name }</h2>
+          <p>{ task.details }</p>
+        </>
+      );
+    }
+  }
 
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>Your Tasks</h1>
+        <TaskList />
       </div>
-      <h1>Vite + React</h1>
-      <h1 onClick={() => setCount(0)}>🦆</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div>
+        <h1>Details</h1>
+        <TaskDetails />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
