@@ -66,10 +66,14 @@ function App() {
     <>
       <div>
         <h1>Your Tasks</h1>
+        <button>Add A Task</button>
         <TaskList />
       </div>
       <div>
         <h1>Details</h1>
+        <button>Edit Task Details</button>
+        <button>Complete Task</button>
+        <button>Forget Task</button>
         <TaskDetails />
       </div>
     </>
